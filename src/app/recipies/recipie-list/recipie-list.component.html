@@ -1,0 +1,16 @@
+<div class="w-full py-4">
+    <button class="border text-blue-400 rounded px-2 border-blue-400 active:bg-blue-200  focus:border-blue-400 transition-colors font-medium
+    ">New Recipe</button>
+</div>
+<div class="w-full">
+    <div class="p-2 border rounded my-2" *ngFor="let recipe of recipies">
+        <a [href]="recipe.imgPath" class="" target="_blank">
+            <h4>{{ recipe.name }}</h4>
+            <p>{{ recipe.description }}</p>
+            <span>
+                <img [src]="recipe.imgPath" alt="recipe image" class="object-cover max-h-14">
+            </span>
+        </a>
+    </div>
+    <app-recipie-item></app-recipie-item>
+</div>
