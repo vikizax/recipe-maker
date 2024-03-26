@@ -3,13 +3,15 @@
     ">New Recipe</button>
 </div>
 <div class="w-full">
-    <div class="p-2 border rounded my-2" *ngFor="let recipe of recipies">
-        <a [href]="recipe.imgPath" class="" target="_blank">
-            <h4>{{ recipe.name }}</h4>
-            <p>{{ recipe.description }}</p>
-            <span>
-                <img [src]="recipe.imgPath" alt="recipe image" class="object-cover max-h-14">
-            </span>
+    <div class="p-2 border rounded my-2 hover:bg-slate-100 transition-colors" *ngFor="let recipe of recipies">
+        <a [href]="recipe.imgPath" class="flex justify-between" target="_blank">
+            <div class="flex flex-col justify-center">
+                <h4>{{ recipe.name }}</h4>
+                <p>{{ recipe.description }}</p>
+            </div>
+
+            <img [src]="recipe.imgPath" [alt]="recipe.name" class="object-cover max-h-16">
+
         </a>
     </div>
     <app-recipie-item></app-recipie-item>
