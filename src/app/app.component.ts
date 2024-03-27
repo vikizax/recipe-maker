@@ -7,4 +7,8 @@ import { HeaderComponent } from './header/header.component';
   styleUrl: './app.component.css',
 })
 export class AppComponent {
+  currentFeature: string = 'recipes'
+  onNavigate(feature: string) {
+    this.currentFeature = feature
+  }
 }

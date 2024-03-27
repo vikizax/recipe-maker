@@ -1,8 +1,8 @@
-<div class="p-4">
-    <img src="#" alt="recipe-img"  class="object-cover">
-    <h2 class="text-2xl font-semibold">Recipe Name</h2>
+<div class="p-4 flex flex-col gap-2">
+    <img [src]="recipe.imgPath" alt="recipe-img" class="border object-cover h-48 w-48 rounded">
+    <h2 class="text-2xl font-semibold">{{ recipe.name }}</h2>
 
-    <select name="recipe-select" id="manage-recipe" title="Manage Recipe">
+    <select name="recipe-select" id="manage-recipe" title="Manage Recipe" class="border p-1 rounded w-fit">
         <option value="" selected disabled>Mange Recipe</option>
         <option value="">To Shopping List</option>
         <option value="">Edit Recipe</option>
@@ -10,7 +10,7 @@
     </select>
 
     <div>
-        Description
+        {{ recipe.description }}
     </div>
 
     <div>

@@ -1,1 +1,9 @@
-<p>recipie-item works!</p>
+<a href="#" class="flex justify-between" (click)="onSelected()" >
+    <div class="flex flex-col justify-center">
+        <h4>{{ recipe.name }}</h4>
+        <p>{{ recipe.description }}</p>
+    </div>
+
+    <img [src]="recipe.imgPath" [alt]="recipe.name" class="object-cover max-h-16">
+
+</a>

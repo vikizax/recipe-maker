@@ -1,5 +1,5 @@
-<app-header></app-header>
+<app-header (featureSelected)="onNavigate($event)"></app-header>
 <div class="container mx-auto">
-    <app-recipies></app-recipies>
-    <app-shopping-list></app-shopping-list>
+    <app-recipies *ngIf="currentFeature === 'recipes'"></app-recipies>
+    <app-shopping-list *ngIf="currentFeature !== 'recipes'"></app-shopping-list>
 </div>

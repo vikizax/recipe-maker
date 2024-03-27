@@ -3,16 +3,7 @@
     ">New Recipe</button>
 </div>
 <div class="w-full">
-    <div class="p-2 border rounded my-2 hover:bg-slate-100 transition-colors" *ngFor="let recipe of recipies">
-        <a [href]="recipe.imgPath" class="flex justify-between" target="_blank">
-            <div class="flex flex-col justify-center">
-                <h4>{{ recipe.name }}</h4>
-                <p>{{ recipe.description }}</p>
-            </div>
-
-            <img [src]="recipe.imgPath" [alt]="recipe.name" class="object-cover max-h-16">
-
-        </a>
+    <div class="p-2 border rounded my-2 hover:bg-slate-100 transition-colors" *ngFor="let recipe of recipies" >
+        <app-recipie-item [recipe]="recipe" (recipeSelected)="onRecipeSelected(recipe)" ></app-recipie-item>
     </div>
-    <app-recipie-item></app-recipie-item>
 </div>
