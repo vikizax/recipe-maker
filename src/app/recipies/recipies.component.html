@@ -2,7 +2,12 @@
     <div class="col-span-12 sm:col-span-12 md:col-span-5">
         <app-recipie-list (recipeSelected)="onSelectedRecipe($event)"></app-recipie-list>
     </div>
-    <div class="col-span-12 sm:col-span-12 md:col-span-7 " *ngIf="selectedRecipe">
+    <ng-template #elseTemplate>
+        <div class="col-span-12 sm:col-span-12 md:col-span-7 my-auto">
+            <p class="text-xl text-center">Please select a recipe!</p>
+        </div>
+    </ng-template>
+    <div class="col-span-12 sm:col-span-12 md:col-span-7 " *ngIf="selectedRecipe; else elseTemplate">
         <app-recipie-details [recipe]="selectedRecipe"></app-recipie-details>
     </div>
 </div>
