@@ -2,7 +2,7 @@
     <img [src]="recipe.imgPath" alt="recipe-img" class="border object-cover h-48 w-48 rounded">
     <h2 class="text-2xl font-semibold">{{ recipe.name }}</h2>
 
-    <select name="recipe-select" id="manage-recipe" title="Manage Recipe" class="border p-1 rounded w-fit">
+    <select name="recipe-select" id="manage-recipe" title="Manage Recipe" class="border p-1 rounded w-fit" appHighlight>
         <option value="" selected disabled>Mange Recipe</option>
         <option value="">To Shopping List</option>
         <option value="">Edit Recipe</option>

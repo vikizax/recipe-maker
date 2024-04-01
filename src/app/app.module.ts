@@ -1,15 +1,16 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { AppComponent } from './app.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
-import { RecipiesComponent } from './recipies/recipies.component';
-import { RecipieListComponent } from './recipies/recipie-list/recipie-list.component';
 import { RecipieDetailsComponent } from './recipies/recipie-details/recipie-details.component';
 import { RecipieItemComponent } from './recipies/recipie-list/recipie-item/recipie-item.component';
-import { ShoppingListComponent } from './shopping-list/shopping-list.component';
+import { RecipieListComponent } from './recipies/recipie-list/recipie-list.component';
+import { RecipiesComponent } from './recipies/recipies.component';
+import { HighlightDirective } from './shared/highlight.directive';
 import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-edit.component';
+import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 
 @NgModule({
   declarations: [
@@ -20,13 +21,14 @@ import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-ed
     RecipieDetailsComponent,
     RecipieItemComponent,
     ShoppingListComponent,
-    ShoppingEditComponent
+    ShoppingEditComponent,
+    HighlightDirective,
   ],
   imports: [
     BrowserModule
   ],
   providers: [
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
   ],
   bootstrap: [AppComponent]
 })
