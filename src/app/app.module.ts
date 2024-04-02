@@ -8,7 +8,7 @@ import { RecipieDetailsComponent } from './recipies/recipie-details/recipie-deta
 import { RecipieItemComponent } from './recipies/recipie-list/recipie-item/recipie-item.component';
 import { RecipieListComponent } from './recipies/recipie-list/recipie-list.component';
 import { RecipiesComponent } from './recipies/recipies.component';
-import { HighlightDirective } from './shared/dropdown.directive';
+import { HighlightDirective } from './shared/highlight.directive';
 import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-edit.component';
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 
@@ -22,13 +22,13 @@ import { ShoppingListComponent } from './shopping-list/shopping-list.component';
     RecipieItemComponent,
     ShoppingListComponent,
     ShoppingEditComponent,
-    HighlightDirective
+    HighlightDirective,
   ],
   imports: [
     BrowserModule
   ],
   providers: [
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
   ],
   bootstrap: [AppComponent]
 })
