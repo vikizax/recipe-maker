@@ -3,7 +3,7 @@
     ">New Recipe</button>
 </div>
 <div class="w-full">
-    <div class="p-2 border rounded my-2 hover:bg-slate-100 transition-colors" *ngFor="let recipe of recipies" >
-        <app-recipie-item [recipe]="recipe" (recipeSelected)="onRecipeSelected(recipe)" ></app-recipie-item>
+    <div class="p-2 border rounded my-2 hover:bg-slate-100 transition-colors" *ngFor="let recipe of recipies">
+        <app-recipie-item [recipe]="recipe" (click)="onRecipeSelected(recipe)"></app-recipie-item>
     </div>
 </div>

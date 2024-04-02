@@ -11,6 +11,9 @@ import { RecipiesComponent } from './recipies/recipies.component';
 import { HighlightDirective } from './shared/highlight.directive';
 import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-edit.component';
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
+import { IngredientService } from './shared/ingredient.service';
+import { RecipeService } from './shared/recipe.service';
+import { LoggingService } from './shared/logging.service';
 
 @NgModule({
   declarations: [
@@ -29,6 +32,9 @@ import { ShoppingListComponent } from './shopping-list/shopping-list.component';
   ],
   providers: [
     provideAnimationsAsync(),
+    IngredientService,
+    RecipeService,
+    LoggingService
   ],
   bootstrap: [AppComponent]
 })
