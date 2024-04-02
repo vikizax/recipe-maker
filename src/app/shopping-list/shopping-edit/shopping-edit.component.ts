@@ -1,6 +1,6 @@
 import { Component, ElementRef, EventEmitter, Output, ViewChild } from '@angular/core';
 import { Ingredient } from '../../shared/ingredient.model';
-import { LoggingDependency } from '../../shared/logging.dependecy';
+import { LoggingDependency } from '../../shared/logging.dependency';
 
 @Component({
   selector: 'app-shopping-edit',
@@ -16,11 +16,17 @@ export class ShoppingEditComponent {
   constructor(private loggingService: LoggingDependency) { }
 
   onAddItem(event: Event) {
-    event.preventDefault()
+    event.preventDefault();
     const ingredientName = this.nameInputRef.nativeElement.value;
     const ingredientAmount = +this.amountInputRef.nativeElement.value;
-    const newIngredient = new Ingredient(ingredientName, ingredientAmount)
-    this.loggingService.log('NEW ITEM ADDED')
+
+    if (!ingredientName || ingredientAmount === 0) {
+      this.loggingService.log('NEW ITEM ADDED GAURD CLOUSE - NO DATA');
+      return;
+    }
+
+    const newIngredient = new Ingredient(ingredientName, ingredientAmount);
+    this.loggingService.log('NEW ITEM ADDED');
     this.addedIngredient.emit(newIngredient);
   }
 }
