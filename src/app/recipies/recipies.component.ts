@@ -1,15 +1,24 @@
-import { Component, DoCheck, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { RecipeService } from './recipe.service';
 import { Recipe } from './recipie-list/recipe.model';
-import { RecipeService } from '../shared/recipe.service';
 
 @Component({
   selector: 'app-recipies',
   templateUrl: './recipies.component.html',
-  styleUrl: './recipies.component.css'
+  styleUrl: './recipies.component.css',
+  providers: [RecipeService]
 })
-export class RecipiesComponent {
+export class RecipiesComponent implements OnInit, OnDestroy {
   selectedRecipe: Recipe;
-  onSelectedRecipe(recipe: Recipe) {
-    this.selectedRecipe = recipe
+  currentSelectedReciepeSubscription: Subscription;
+  constructor(private recipeService: RecipeService) { }
+  ngOnInit() {
+    this.currentSelectedReciepeSubscription = this.recipeService.currentSelectedRecipe.subscribe((recipe: Recipe) => {
+      this.selectedRecipe = recipe
+    })
+  }
+  ngOnDestroy(): void {
+    this.currentSelectedReciepeSubscription.unsubscribe()
   }
 }

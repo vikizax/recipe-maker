@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -11,9 +10,7 @@ import { RecipiesComponent } from './recipies/recipies.component';
 import { HighlightDirective } from './shared/highlight.directive';
 import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-edit.component';
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
-import { IngredientService } from './shared/ingredient.service';
-import { RecipeService } from './shared/recipe.service';
-import { LoggingService } from './shared/logging.service';
+import { ShoppingListService } from './shopping-list/shopping-list.service';
 
 @NgModule({
   declarations: [
@@ -32,9 +29,7 @@ import { LoggingService } from './shared/logging.service';
   ],
   providers: [
     provideAnimationsAsync(),
-    IngredientService,
-    RecipeService,
-    LoggingService
+    ShoppingListService
   ],
   bootstrap: [AppComponent]
 })
