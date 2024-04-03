@@ -2,11 +2,13 @@
     <img [src]="recipe.imgPath" alt="recipe-img" class="border object-cover h-48 w-48 rounded">
     <h2 class="text-2xl font-semibold">{{ recipe.name }}</h2>
 
-    <select name="recipe-select" id="manage-recipe" title="Manage Recipe" class="border p-1 rounded w-fit" appHighlight>
+    <select 
+    (change)="onSelectChange($event)"
+    name="recipe-select" id="manage-recipe" title="Manage Recipe" class="border p-1 rounded w-fit" appHighlight>
         <option value="" selected disabled>Mange Recipe</option>
-        <option value="">To Shopping List</option>
-        <option value="">Edit Recipe</option>
-        <option value="">Delete Recipe</option>
+        <option value="to-shopping-list">To Shopping List</option>
+        <option value="edit-recipe">Edit Recipe</option>
+        <option value="delete-recipe">Delete Recipe</option>
     </select>
 
     <div>
@@ -14,7 +16,13 @@
     </div>
 
     <div>
-        Ingredients
+        <ul>
+            <li *ngFor="let ingrent of recipe.ingredients; let i = index"
+                [ngClass]="i === recipe.ingredients.length - 1?'border' : 'border-t'"
+                class="border-x rounded p-2 cursor-default hover:bg-slate-100">
+                {{ ingrent.amount }} {{ ingrent.name }}
+            </li>
+        </ul>
     </div>
 
 </div>

@@ -5,11 +5,7 @@ import { LoggingService } from "../shared/logging.service";
 @Injectable()
 export class ShoppingListService {
     ingredientsUpdate = new EventEmitter<Ingredient[]>();
-    private ingredients: Ingredient[] = [
-        new Ingredient('Apples', 5),
-        new Ingredient('Tomatoes', 10),
-        new Ingredient('Carrot', 10),
-    ]
+    private ingredients: Ingredient[] = []
 
     constructor(private loggingService: LoggingService) { }
 
@@ -20,6 +16,12 @@ export class ShoppingListService {
     addIngredient(ingredient: Ingredient) {
         this.loggingService.log('ADD INGREDIENT: ' + JSON.stringify(ingredient))
         this.ingredients.push(ingredient);
+        this.ingredientsUpdate.emit(this.getIngredients())
+    }
+
+    addIngredients(ingredients: Ingredient[]) {
+        this.loggingService.log('ADDING INGREDIENTS FROM RECIPE ' + JSON.stringify(ingredients))
+        this.ingredients = this.ingredients.concat(ingredients)
         this.ingredientsUpdate.emit(this.getIngredients())
     }
 }
