@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { RecipieDetailsComponent } from './recipies/recipie-details/recipie-details.component';
@@ -11,6 +12,21 @@ import { HighlightDirective } from './shared/highlight.directive';
 import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-edit.component';
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { ShoppingListService } from './shopping-list/shopping-list.service';
+
+const route: Routes = [
+  {
+    path: '',
+    component: RecipiesComponent
+  },
+  {
+    path: 'recipies',
+    component: RecipiesComponent
+  },
+  {
+    path: 'shopping-list',
+    component: ShoppingListComponent
+  }
+]
 
 @NgModule({
   declarations: [
@@ -25,7 +41,8 @@ import { ShoppingListService } from './shopping-list/shopping-list.service';
     HighlightDirective,
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    RouterModule.forRoot(route)
   ],
   providers: [
     provideAnimationsAsync(),

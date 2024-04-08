@@ -3,11 +3,17 @@
         <div class="relative flex h-16 items-center justify-between">
             <div class="left-side text-white flex gap-4">
                 <div class="brand font-bold">
-                    Recipe Book
+                    <a routerLink="/">
+                        Recipe Book
+                    </a>
                 </div>
                 <div class="links flex gap-2">
-                    <a href="#" (click)="onSelect('recipes', $event)">Recipies</a>
-                    <a href="#" (click)="onSelect('shopping-list', $event)">Shopping list</a>
+                    <!-- <a href="#" (click)="onSelect('recipes', $event)">Recipies</a>
+                    <a href="#" (click)="onSelect('shopping-list', $event)">Shopping list</a>  -->
+                    <a routerLink="/recipies" routerLinkActive="'underline'"
+                        [routerLinkActiveOptions]="{exact: true}">Recipies</a>
+                    <a routerLink="/shopping-list" routerLinkActive="'underline'"
+                        [routerLinkActiveOptions]="{exact: true}">Shopping list</a>
                 </div>
             </div>
             <div class="right text-white">
