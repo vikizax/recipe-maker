@@ -12,21 +12,8 @@ import { HighlightDirective } from './shared/highlight.directive';
 import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-edit.component';
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { ShoppingListService } from './shopping-list/shopping-list.service';
+import { AppRoutingModule } from './app.routing';
 
-const route: Routes = [
-  {
-    path: '',
-    component: RecipiesComponent
-  },
-  {
-    path: 'recipies',
-    component: RecipiesComponent
-  },
-  {
-    path: 'shopping-list',
-    component: ShoppingListComponent
-  }
-]
 
 @NgModule({
   declarations: [
@@ -42,7 +29,7 @@ const route: Routes = [
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(route)
+    AppRoutingModule
   ],
   providers: [
     provideAnimationsAsync(),
