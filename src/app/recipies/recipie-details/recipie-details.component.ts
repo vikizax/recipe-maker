@@ -1,6 +1,7 @@
-import { Component, Input } from '@angular/core';
-import { Recipe } from '../recipie-list/recipe.model';
+import { Component, OnInit } from '@angular/core';
 import { RecipeService } from '../recipe.service';
+import { Recipe } from '../recipie-list/recipe.model';
+import { ActivatedRoute, Params } from '@angular/router';
 
 type MangeRecipeType = 'to-shopping-list' | 'edit-recipe' | 'delete-recipe'
 
@@ -9,10 +10,17 @@ type MangeRecipeType = 'to-shopping-list' | 'edit-recipe' | 'delete-recipe'
   templateUrl: './recipie-details.component.html',
   styleUrl: './recipie-details.component.css'
 })
-export class RecipieDetailsComponent {
-  @Input() recipe: Recipe;
+export class RecipieDetailsComponent implements  OnInit {
+  recipe: Recipe;
+  id: number;
+  constructor(private recipeService: RecipeService, private route: ActivatedRoute) { }
 
-  constructor(private recipeService: RecipeService) { }
+  ngOnInit(): void {
+    this.route.params.subscribe((params: Params) => {
+        this.id = +params.id
+        this.recipe = this.recipeService.getRecipieById(this.id)
+    })
+  }
 
   onSelectChange(event: Event & { target: HTMLSelectElement & { value: MangeRecipeType } }) {
     if (event.target.value === 'to-shopping-list') {

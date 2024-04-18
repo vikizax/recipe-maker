@@ -9,9 +9,10 @@ import { Recipe } from '../recipe.model';
 })
 export class RecipieItemComponent {
   @Input() recipe: Recipe;
+  @Input() index: number;
   constructor(private recipeService: RecipeService) { }
-  onSelected(event: Event) {
-    event.preventDefault()
-    this.recipeService.currentSelectedRecipe.emit(this.recipe)
-  }
+  // onSelected(event: Event) {
+  //   event.preventDefault()
+  //   this.recipeService.currentSelectedRecipe.emit(this.recipe)
+  // }
 }

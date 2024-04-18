@@ -10,9 +10,9 @@
                 <div class="links flex gap-2">
                     <!-- <a href="#" (click)="onSelect('recipes', $event)">Recipies</a>
                     <a href="#" (click)="onSelect('shopping-list', $event)">Shopping list</a>  -->
-                    <a routerLink="/recipies" routerLinkActive="'underline'"
+                    <a routerLink="/recipies" [routerLinkActive]="'underline'"
                         [routerLinkActiveOptions]="{exact: true}">Recipies</a>
-                    <a routerLink="/shopping-list" routerLinkActive="'underline'"
+                    <a routerLink="/shopping-list" [routerLinkActive]="'underline'"
                         [routerLinkActiveOptions]="{exact: true}">Shopping list</a>
                 </div>
             </div>

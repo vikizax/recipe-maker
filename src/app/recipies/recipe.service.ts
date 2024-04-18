@@ -47,6 +47,10 @@ export class RecipeService {
         return this.recipies.slice();
     }
 
+    getRecipieById(idx: number) {
+        return this.recipies.slice()[idx]
+    }
+
     getCurrentSelectedRecipe() {
         return this.currentSelectedRecipe;
     }
