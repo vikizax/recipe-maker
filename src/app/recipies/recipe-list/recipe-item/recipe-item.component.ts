@@ -3,11 +3,11 @@ import { RecipeService } from '../../recipe.service';
 import { Recipe } from '../recipe.model';
 
 @Component({
-  selector: 'app-recipie-item',
-  templateUrl: './recipie-item.component.html',
-  styleUrl: './recipie-item.component.css'
+  selector: 'app-recipe-item',
+  templateUrl: './recipe-item.component.html',
+  styleUrl: './recipe-item.component.css'
 })
-export class RecipieItemComponent {
+export class RecipeItemComponent {
   @Input() recipe: Recipe;
   @Input() index: number;
   constructor(private recipeService: RecipeService) { }

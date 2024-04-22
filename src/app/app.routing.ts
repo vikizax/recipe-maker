@@ -3,7 +3,8 @@ import { RouterModule, Routes } from "@angular/router";
 import { RecipiesComponent } from "./recipies/recipies.component";
 import { ShoppingListComponent } from "./shopping-list/shopping-list.component";
 import { RecipeStartComponent } from "./recipies/recipe-start/recipe-start.component";
-import { RecipieDetailsComponent } from "./recipies/recipie-details/recipie-details.component";
+import { RecipeDetailsComponent } from "./recipies/recipe-details/recipe-details.component";
+import { RecipeEditComponent } from "./recipies/recipe-edit/recipe-edit.component";
 
 const route: Routes = [
     {
@@ -20,9 +21,17 @@ const route: Routes = [
                 component: RecipeStartComponent,
             },
             {
+                path: 'new',
+                component: RecipeEditComponent
+            },
+            {
                 path: ':id',
-                component: RecipieDetailsComponent
-            }
+                component: RecipeDetailsComponent
+            },
+            {
+                path: ':id/edit',
+                component: RecipeEditComponent
+            },
         ]
     },
     {

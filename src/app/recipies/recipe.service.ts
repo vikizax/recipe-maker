@@ -1,5 +1,5 @@
 import { EventEmitter, Injectable } from "@angular/core";
-import { Recipe } from "./recipie-list/recipe.model";
+import { Recipe } from "./recipe-list/recipe.model";
 import { LoggingService } from "../shared/logging.service";
 import { Ingredient } from "../shared/ingredient.model";
 import { ShoppingListService } from "../shopping-list/shopping-list.service";

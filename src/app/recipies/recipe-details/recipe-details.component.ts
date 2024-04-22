@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { RecipeService } from '../recipe.service';
-import { Recipe } from '../recipie-list/recipe.model';
+import { Recipe } from '../recipe-list/recipe.model';
 import { ActivatedRoute, Params } from '@angular/router';
 
 type MangeRecipeType = 'to-shopping-list' | 'edit-recipe' | 'delete-recipe'
 
 @Component({
-  selector: 'app-recipie-details',
-  templateUrl: './recipie-details.component.html',
-  styleUrl: './recipie-details.component.css'
+  selector: 'app-recipe-details',
+  templateUrl: './recipe-details.component.html',
+  styleUrl: './recipe-details.component.css'
 })
-export class RecipieDetailsComponent implements  OnInit {
+export class RecipeDetailsComponent implements  OnInit {
   recipe: Recipe;
   id: number;
   constructor(private recipeService: RecipeService, private route: ActivatedRoute) { }

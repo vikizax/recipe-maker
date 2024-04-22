@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { RecipeService } from './recipe.service';
-import { Recipe } from './recipie-list/recipe.model';
+import { Recipe } from './recipe-list/recipe.model';
 
 @Component({
   selector: 'app-recipies',

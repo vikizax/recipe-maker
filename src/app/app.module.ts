@@ -4,9 +4,9 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
-import { RecipieDetailsComponent } from './recipies/recipie-details/recipie-details.component';
-import { RecipieItemComponent } from './recipies/recipie-list/recipie-item/recipie-item.component';
-import { RecipieListComponent } from './recipies/recipie-list/recipie-list.component';
+import { RecipeDetailsComponent } from './recipies/recipe-details/recipe-details.component';
+import { RecipeItemComponent } from './recipies/recipe-list/recipe-item/recipe-item.component';
+import { RecipeListComponent } from './recipies/recipe-list/recipe-list.component';
 import { RecipiesComponent } from './recipies/recipies.component';
 import { HighlightDirective } from './shared/highlight.directive';
 import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-edit.component';
@@ -14,6 +14,7 @@ import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { ShoppingListService } from './shopping-list/shopping-list.service';
 import { AppRoutingModule } from './app.routing';
 import { RecipeStartComponent } from './recipies/recipe-start/recipe-start.component';
+import { RecipeEditComponent } from './recipies/recipe-edit/recipe-edit.component';
 
 
 @NgModule({
@@ -21,13 +22,14 @@ import { RecipeStartComponent } from './recipies/recipe-start/recipe-start.compo
     AppComponent,
     HeaderComponent,
     RecipiesComponent,
-    RecipieListComponent,
-    RecipieDetailsComponent,
-    RecipieItemComponent,
+    RecipeListComponent,
+    RecipeDetailsComponent,
+    RecipeItemComponent,
     ShoppingListComponent,
     ShoppingEditComponent,
     HighlightDirective,
     RecipeStartComponent,
+    RecipeEditComponent,
   ],
   imports: [
     BrowserModule,
