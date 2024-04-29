@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RecipeService } from '../recipe.service';
 import { Recipe } from '../recipe-list/recipe.model';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Route, Router } from '@angular/router';
 
 type MangeRecipeType = 'to-shopping-list' | 'edit-recipe' | 'delete-recipe'
 
@@ -10,15 +10,15 @@ type MangeRecipeType = 'to-shopping-list' | 'edit-recipe' | 'delete-recipe'
   templateUrl: './recipe-details.component.html',
   styleUrl: './recipe-details.component.css'
 })
-export class RecipeDetailsComponent implements  OnInit {
+export class RecipeDetailsComponent implements OnInit {
   recipe: Recipe;
   id: number;
-  constructor(private recipeService: RecipeService, private route: ActivatedRoute) { }
+  constructor(private recipeService: RecipeService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
-        this.id = +params.id
-        this.recipe = this.recipeService.getRecipieById(this.id)
+      this.id = +params.id
+      this.recipe = this.recipeService.getRecipieById(this.id)
     })
   }
 
@@ -26,7 +26,15 @@ export class RecipeDetailsComponent implements  OnInit {
     if (event.target.value === 'to-shopping-list') {
       this.recipeService.addIngredientsToShoppingList(this.recipe.ingredients)
     }
-    if (event.target.value === 'edit-recipe') { }
+    if (event.target.value === 'edit-recipe') {
+      this.toEditRecipie()
+    }
     if (event.target.value === 'delete-recipe') { }
   }
+
+  toEditRecipie() {
+    // this.router.navigate(['../',this.id,'edit'])
+    this.router.navigate(['edit'], { relativeTo: this.route })
+  }
+
 }
