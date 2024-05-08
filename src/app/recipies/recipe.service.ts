@@ -1,8 +1,9 @@
-import { EventEmitter, Injectable } from "@angular/core";
-import { Recipe } from "./recipe-list/recipe.model";
-import { LoggingService } from "../shared/logging.service";
+import { Injectable } from "@angular/core";
+import { Subject } from 'rxjs';
 import { Ingredient } from "../shared/ingredient.model";
+import { LoggingService } from "../shared/logging.service";
 import { ShoppingListService } from "../shopping-list/shopping-list.service";
+import { Recipe } from "./recipe-list/recipe.model";
 
 @Injectable()
 export class RecipeService {
@@ -39,8 +40,6 @@ export class RecipeService {
         )
     ]
 
-    currentSelectedRecipe = new EventEmitter<Recipe>();
-
     constructor(private loggingService: LoggingService, private shoppingListService: ShoppingListService) { }
 
     getRecipies() {
@@ -49,10 +48,6 @@ export class RecipeService {
 
     getRecipieById(idx: number) {
         return this.recipies.slice()[idx]
-    }
-
-    getCurrentSelectedRecipe() {
-        return this.currentSelectedRecipe;
     }
 
     addRecipe(recipe: Recipe) {

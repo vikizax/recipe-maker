@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { HeaderComponent } from './header/header.component';
 
 @Component({
   selector: 'app-root',
@@ -7,8 +6,4 @@ import { HeaderComponent } from './header/header.component';
   styleUrl: './app.component.css',
 })
 export class AppComponent {
-  // currentFeature: string = 'recipes'
-  // onNavigate(feature: string) {
-  //   this.currentFeature = feature
-  // }
 }
