@@ -8,6 +8,7 @@
             <li *ngFor="let ingredient of ingredients; let i = index"
                 [ngClass]="i === ingredients.length - 1?'border' : 'border-t'"
                 class="border-x rounded p-2 cursor-pointer hover:bg-slate-100"
+                (click)="onEditItem(i)"
                 >
                 <!-- <a href=""> -->
                 {{ ingredient.name }} {{ ingredient.amount }}
