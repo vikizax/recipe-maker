@@ -32,6 +32,7 @@ export class ShoppingListService {
     }
 
     editIngretient(index: number, updatedIngredient: Ingredient) {
+        if (index === null || index === undefined) return;
         this.loggingService.log('EDITED INGREDIENT' + JSON.stringify(updatedIngredient))
         this.ingredients[index] = updatedIngredient;
         this.ingredientsUpdate.next(this.getIngredients())
@@ -39,6 +40,7 @@ export class ShoppingListService {
     }
 
     deleteIngredient(index: number) {
+        if (index === null || index === undefined) return;
         this.loggingService.log('DELETED INGREDIENT INDEX ' + index)
         this.ingredients.splice(index, 1)
         this.ingredientsUpdate.next(this.getIngredients())

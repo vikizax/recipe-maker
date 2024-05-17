@@ -30,13 +30,13 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
         this.editMode = true;
         this.editedItemIndex = index;
         this.editedItem = this.shoppingListService.getIngredient(index)
-        this.shoppingListForm.setValue({
-          'name': this.editedItem.name,
-          'amount': this.editedItem.amount
-        })
+        if (this.editedItem)
+          this.shoppingListForm.setValue({
+            'name': this.editedItem.name,
+            'amount': this.editedItem.amount
+          })
       }
     )
-
   }
   // onAddItem(event: Event) {
   // event.preventDefault();
@@ -64,16 +64,21 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
   onEdit(updatedIngredient: Ingredient) {
     this.shoppingListService.editIngretient(this.editedItemIndex, updatedIngredient)
     this.shoppingListForm.reset()
-    this.editMode = false;
+    this.onClear();
   }
 
   onDelete() {
     this.shoppingListService.deleteIngredient(this.editedItemIndex)
-    this.shoppingListForm.reset()
+    this.onClear()
   }
 
   onClear() {
     this.shoppingListForm.reset();
+    this.editMode = false;
+  }
+
+  isDeleteEnabled() {
+    return !Number.isInteger(this.editedItemIndex)
   }
 
   ngOnDestroy(): void {
