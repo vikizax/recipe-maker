@@ -25,7 +25,7 @@
             [ngClass]="isDeleteEnabled() ? 'text-slate-300 border-slate-300 active:bg-transparent focus:border-slate-300': ''">Delete</button>
         <button type="button"
             class="border text-blue-400 rounded px-2 border-blue-400 active:bg-blue-200   transition-colors font-medium"
-            (click)="onClear()" [disabled]="!this.shoppingListForm.touched"
-            [ngClass]="this.shoppingListForm.touched ? '': 'text-slate-300 border-slate-300 active:bg-transparent'">Clear</button>
+            (click)="onClear()" [disabled]="!isClearEnabled()"
+            [ngClass]="isClearEnabled() ? '': 'text-slate-300 border-slate-300 active:bg-transparent'">Clear</button>
     </div>
 </form>

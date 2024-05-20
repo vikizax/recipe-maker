@@ -1,8 +1,8 @@
-import { Component, ElementRef, ViewChild, OnInit, OnDestroy } from '@angular/core';
-import { Ingredient } from '../../shared/ingredient.model';
-import { ShoppingListService } from '../shopping-list.service';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { Ingredient } from '../../shared/ingredient.model';
+import { ShoppingListService } from '../shopping-list.service';
 
 @Component({
   selector: 'app-shopping-edit',
@@ -81,8 +81,11 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
     return !Number.isInteger(this.editedItemIndex)
   }
 
+  isClearEnabled() {
+    return !!this.shoppingListForm.get('name').value || Number.isInteger(this.shoppingListForm.get('amount').value)
+  }
+
   ngOnDestroy(): void {
     this.editSubscription.unsubscribe();
   }
-
 }
