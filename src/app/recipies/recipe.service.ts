@@ -59,4 +59,9 @@ export class RecipeService {
         this.loggingService.log('ADDING INGREDIENTS TO SHOPPING LIST SERVICE: ' + JSON.stringify(ingredients));
         this.shoppingListService.addIngredients(ingredients)
     }
+
+    updateRecipeById(idx:number,updatedRecipe: Recipe){
+        this.recipies[idx] = updatedRecipe;
+        
+    }
 }
