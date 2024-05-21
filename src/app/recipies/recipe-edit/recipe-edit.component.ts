@@ -15,10 +15,10 @@ export class RecipeEditComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private recipeService: RecipeService) { }
   ngOnInit(): void {
+    this.initForm()
     this.route.params.subscribe(params => {
       this.id = +params.id;
       this.editMode = params.id !== undefined
-      this.initForm()
     })
   }
 
@@ -28,27 +28,29 @@ export class RecipeEditComponent implements OnInit {
 
   initForm() {
     const ingredientsFormArray = new FormArray([])
-    const { description, imgPath, ingredients, name } = this.recipeService.getRecipieById(this.id)
+    if (this.editMode) {
+      const { description, imgPath, ingredients, name } = this.recipeService.getRecipieById(this.id)
 
-    if (ingredients) {
-      for (let ingredient of ingredients) {
-        ingredientsFormArray.push(new FormGroup({
-          'name': new FormControl(ingredient.name, Validators.required),
-          'amount': new FormControl(ingredient.amount, [Validators.required, Validators.pattern(/^\d*\.?\d*$/)])
-        }))
+      if (ingredients) {
+        for (let ingredient of ingredients) {
+          ingredientsFormArray.push(new FormGroup({
+            'name': new FormControl(ingredient.name, Validators.required),
+            'amount': new FormControl(ingredient.amount, [Validators.required, Validators.pattern(/^\d*\.?\d*$/)])
+          }))
+        }
       }
+      this.recipeForm.patchValue({
+        name,
+        description,
+        imgPath
+      })
     }
+
     this.recipeForm = new FormGroup({
       'name': new FormControl(null, Validators.required),
       'imgPath': new FormControl(null),
       'description': new FormControl(null, Validators.required),
       'ingredients': ingredientsFormArray
-    })
-
-    this.recipeForm.patchValue({
-      name,
-      description,
-      imgPath
     })
   }
 

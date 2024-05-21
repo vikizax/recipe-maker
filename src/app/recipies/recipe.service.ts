@@ -62,6 +62,5 @@ export class RecipeService {
 
     updateRecipeById(idx:number,updatedRecipe: Recipe){
         this.recipies[idx] = updatedRecipe;
-        
     }
 }
