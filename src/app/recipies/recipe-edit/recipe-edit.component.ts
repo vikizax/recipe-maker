@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormArray, FormControl, FormGroup, NgForm } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { RecipeService } from '../recipe.service';
 
@@ -9,7 +9,6 @@ import { RecipeService } from '../recipe.service';
   styleUrl: './recipe-edit.component.css',
 })
 export class RecipeEditComponent implements OnInit {
-  @ViewChild('form') form: NgForm;
   id: number;
   editMode: boolean = false;
   recipeForm: FormGroup;
@@ -23,8 +22,7 @@ export class RecipeEditComponent implements OnInit {
     })
   }
 
-  onSubmit(form: NgForm) {
-    // console.log(form.value)
+  onSubmit() {
     console.log(this.recipeForm.value)
   }
 
@@ -35,15 +33,15 @@ export class RecipeEditComponent implements OnInit {
     if (ingredients) {
       for (let ingredient of ingredients) {
         ingredientsFormArray.push(new FormGroup({
-          'name': new FormControl(ingredient.name),
-          'amount': new FormControl(ingredient.amount)
+          'name': new FormControl(ingredient.name, Validators.required),
+          'amount': new FormControl(ingredient.amount, [Validators.required, Validators.pattern(/^\d*\.?\d*$/)])
         }))
       }
     }
     this.recipeForm = new FormGroup({
-      'name': new FormControl(),
-      'imgPath': new FormControl(),
-      'description': new FormControl(),
+      'name': new FormControl(null, Validators.required),
+      'imgPath': new FormControl(null, Validators.required),
+      'description': new FormControl(null),
       'ingredients': ingredientsFormArray
     })
 
@@ -56,6 +54,21 @@ export class RecipeEditComponent implements OnInit {
 
   getIngredientsControl() {
     return (this.recipeForm.get('ingredients') as FormArray).controls
+  }
+
+  onAddIngredient() {
+    (<FormArray>this.recipeForm.get('ingredients')).push(
+      new FormGroup({
+        'name': new FormControl(null, Validators.required),
+        'amount': new FormControl(null, [Validators.required, Validators.pattern(/^\d*\.?\d*$/)])
+      })
+    )
+  }
+
+  onRemoveIngredient(index: number) {
+    (<FormArray>this.recipeForm.get('ingredients')).removeAt(
+      index
+    )
   }
 
 }

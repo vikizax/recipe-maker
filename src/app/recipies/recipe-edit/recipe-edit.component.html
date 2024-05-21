@@ -1,8 +1,11 @@
 <div class="py-4">
-    <form (ngSubmit)="onSubmit(form)" [formGroup]="recipeForm">
+    <form (ngSubmit)="onSubmit()" [formGroup]="recipeForm">
         <div class="flex flex-row gap-2 mb-2">
             <button type="submit"
-                class="border text-green-400 rounded px-2 border-green-400 active:bg-green-200  focus:border-green-400 transition-colors font-medium">Save</button>
+                class="border text-green-400 rounded px-2 border-green-400 active:bg-green-200  focus:border-green-400 transition-colors font-medium"
+                [ngClass]="this.recipeForm.invalid ? 'text-slate-300 border-slate-300 active:bg-transparent focus:border-transparent': ''"
+                [disabled]="this.recipeForm.invalid"
+                >Save</button>
             <button type="button"
                 class="border text-red-400 rounded px-2 border-red-400 active:bg-red-200  focus:border-red-400 transition-colors font-medium">Cancel</button>
         </div>
@@ -22,20 +25,24 @@
                 formControlName="description"></textarea>
         </div>
         <div formArrayName="ingredients">
-            <div class="flex flex-row gap-2 items-end" *ngFor="let ingCntrl of getIngredientsControl();let i = index"
-                [formGroupName]="i">
-                <div class="flex flex-col flex-grow">
-                    <input class="flex-grow outline outline-1 rounded outline-gray-300" type="text" name="ingredient"
-                        id="ingredient" formControlName="name" placeholder="Ingredients">
-                </div>
+            <div class="flex gap-2 mt-2 flex-row items-end"
+                *ngFor="let ingCntrl of getIngredientsControl();let i = index" [formGroupName]="i">
 
-                <div class="flex flex-col">
-                    <input class="outline outline-1 rounded outline-gray-300" type="number" min="1" name="ingredient"
-                        id="ingredient" formControlName="amount" placeholder="Amount">
-                </div>
-                <input type="button"
+                <input class="flex-grow outline outline-1  rounded outline-gray-300" type="text" name="ingredient"
+                    id="ingredient" formControlName="name" placeholder="Ingredients">
+
+                <input class="outline outline-1 rounded outline-gray-300" type="number" min="0.5" step="0.5" name="ingredient"
+                    id="ingredient" formControlName="amount" placeholder="Amount">
+
+                <input type="button" (click)="onRemoveIngredient(i)"
                     class="border text-red-400 rounded px-2 border-red-400 active:bg-red-200  focus:border-red-400 transition-colors font-medium"
                     value="X">
+            </div>
+
+            <div class="mt-2">
+                <button type="button" (click)="onAddIngredient()"
+                    class="border text-blue-400 rounded px-2 border-blue-400 active:bg-blue-200  focus:border-blue-400 transition-colors font-medium">Add
+                    Ingredient</button>
             </div>
         </div>
     </form>
