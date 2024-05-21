@@ -1,38 +1,42 @@
-<form class="md:py-4" (ngSubmit)="onSubmit(form)" #form="ngForm">
-    <div class="flex flex-row gap-2 mb-2">
-        <button type="submit"
-            class="border text-green-400 rounded px-2 border-green-400 active:bg-green-200  focus:border-green-400 transition-colors font-medium">Save</button>
-        <button type="button"
-            class="border text-red-400 rounded px-2 border-red-400 active:bg-red-200  focus:border-red-400 transition-colors font-medium">Cancel</button>
-    </div>
-    <div class="flex flex-col gap-2 mb-2">
-        <label for="name">Name</label>
-        <input type="text" name="name" id="name" class="outline outline-1 rounded outline-gray-300" [(ngModel)]="name">
-    </div>
-    <div class="flex flex-col gap-2 mb-2">
-        <label for="imagePath">Image Path</label>
-        <input type="url" name="imagePath" id="imagePath" class="outline outline-1 rounded outline-gray-300"
-            [(ngModel)]="imagePath">
-    </div>
-    <div class="flex flex-col gap-2 mb-2">
-        <label for="description">Description</label>
-        <textarea name="description" id="description" class="outline outline-1 rounded outline-gray-300" rows="6"
-            [(ngModel)]="description"></textarea>
-    </div>
-    <div class="flex flex-row gap-2 items-end">
-        <div class="flex flex-col flex-grow">
-            <label for="ingredient">Ingredient</label>
-            <input class=" flex-grow outline outline-1 rounded outline-gray-300" type="text" name="ingredient"
-                id="ingredient" ngModel>
+<div class="py-4">
+    <form (ngSubmit)="onSubmit(form)" [formGroup]="recipeForm">
+        <div class="flex flex-row gap-2 mb-2">
+            <button type="submit"
+                class="border text-green-400 rounded px-2 border-green-400 active:bg-green-200  focus:border-green-400 transition-colors font-medium">Save</button>
+            <button type="button"
+                class="border text-red-400 rounded px-2 border-red-400 active:bg-red-200  focus:border-red-400 transition-colors font-medium">Cancel</button>
         </div>
+        <div class="flex flex-col gap-2 mb-2">
+            <label for="name">Name</label>
+            <input type="text" name="name" id="name" class="outline outline-1 rounded outline-gray-300"
+                formControlName="name">
+        </div>
+        <div class="flex flex-col gap-2 mb-2">
+            <label for="imagePath">Image Path</label>
+            <input type="url" name="imagePath" id="imagePath" class="outline outline-1 rounded outline-gray-300"
+                formControlName="imgPath">
+        </div>
+        <div class="flex flex-col gap-2 mb-2">
+            <label for="description">Description</label>
+            <textarea name="description" id="description" class="outline outline-1 rounded outline-gray-300" rows="6"
+                formControlName="description"></textarea>
+        </div>
+        <div formArrayName="ingredients">
+            <div class="flex flex-row gap-2 items-end" *ngFor="let ingCntrl of getIngredientsControl();let i = index"
+                [formGroupName]="i">
+                <div class="flex flex-col flex-grow">
+                    <input class="flex-grow outline outline-1 rounded outline-gray-300" type="text" name="ingredient"
+                        id="ingredient" formControlName="name" placeholder="Ingredients">
+                </div>
 
-        <div class="flex flex-col">
-            <label for="amount">Amount</label>
-            <input class="outline outline-1 rounded outline-gray-300" type="number" min="1" name="ingredient"
-                id="ingredient" ngModel>
+                <div class="flex flex-col">
+                    <input class="outline outline-1 rounded outline-gray-300" type="number" min="1" name="ingredient"
+                        id="ingredient" formControlName="amount" placeholder="Amount">
+                </div>
+                <input type="button"
+                    class="border text-red-400 rounded px-2 border-red-400 active:bg-red-200  focus:border-red-400 transition-colors font-medium"
+                    value="X">
+            </div>
         </div>
-        <input type="button"
-            class="border text-red-400 rounded px-2 border-red-400 active:bg-red-200  focus:border-red-400 transition-colors font-medium"
-            value="X" tip>
-    </div>
-</form>
+    </form>
+</div>
