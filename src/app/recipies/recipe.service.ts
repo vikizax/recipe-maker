@@ -7,6 +7,7 @@ import { Recipe } from "./recipe-list/recipe.model";
 
 @Injectable()
 export class RecipeService {
+    recipiesSubject = new Subject<Recipe[]>()
     private recipies: Recipe[] = [
         new Recipe(
             'Burger',
@@ -53,6 +54,7 @@ export class RecipeService {
     addRecipe(recipe: Recipe) {
         this.loggingService.log('ADD RECIPE: ' + JSON.stringify(recipe));
         this.recipies.push(recipe)
+        this.recipiesSubject.next(this.getRecipies())
     }
 
     addIngredientsToShoppingList(ingredients: Ingredient[]) {
@@ -60,7 +62,14 @@ export class RecipeService {
         this.shoppingListService.addIngredients(ingredients)
     }
 
-    updateRecipeById(idx:number,updatedRecipe: Recipe){
+    updateRecipeById(idx: number, updatedRecipe: Recipe) {
+        this.loggingService.log('UPDATING RECIPE: ' + JSON.stringify(updatedRecipe));
         this.recipies[idx] = updatedRecipe;
+        this.recipiesSubject.next(this.getRecipies())
+    }
+
+    deleteRecipeById(idx: number) {
+        this.recipies.splice(idx, 1);
+        this.recipiesSubject.next(this.getRecipies())
     }
 }
