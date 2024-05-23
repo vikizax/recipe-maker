@@ -15,6 +15,7 @@ import { HighlightDirective } from './shared/highlight.directive';
 import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-edit.component';
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { ShoppingListService } from './shopping-list/shopping-list.service';
+import { RecipeService } from './recipies/recipe.service';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { ShoppingListService } from './shopping-list/shopping-list.service';
   ],
   providers: [
     provideAnimationsAsync(),
-    ShoppingListService
+    ShoppingListService,
+    RecipeService
   ],
   bootstrap: [AppComponent]
 })

@@ -14,10 +14,14 @@
             <input type="text" name="name" id="name" class="outline outline-1 rounded outline-gray-300"
                 formControlName="name">
         </div>
-        <div class="flex flex-col gap-2 mb-2">
+        <div class="flex flex-col gap-2 mb-2 ">
             <label for="imagePath">Image Path</label>
             <input type="url" name="imagePath" id="imagePath" class="outline outline-1 rounded outline-gray-300"
                 formControlName="imgPath">
+        </div>
+        <div class="flex flex-row mb-2 justify-start">
+            <img *ngIf="recipeForm.value.imgPath" [src]="recipeForm.value.imgPath" alt="recipe-image" loading="lazy"
+                fetchpriority="low" width="50%" height="50%">
         </div>
         <div class="flex flex-col gap-2 mb-2">
             <label for="description">Description</label>
