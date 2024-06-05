@@ -43,6 +43,11 @@ export class RecipeService {
 
     constructor(private loggingService: LoggingService, private shoppingListService: ShoppingListService) { }
 
+    setRecipe(recipies: Recipe[]) {
+        this.recipies = recipies;
+        this.recipiesSubject.next(this.recipies.slice())
+    }
+
     getRecipies() {
         return this.recipies.slice();
     }

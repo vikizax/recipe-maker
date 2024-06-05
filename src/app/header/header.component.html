@@ -16,8 +16,16 @@
                         [routerLinkActiveOptions]="{exact: true}">Shopping list</a>
                 </div>
             </div>
-            <div class="right text-white">
-                <a href="">Menu &#8595;</a>
+            <div class="right text-white menu-btn">
+                <a href=""  [routerLink]="">Menu &#8595;</a>
+                <ul class="menu-list bg-slate-100 text-black border border-slate-400 px-2">
+                    <li class="border-b-2 border-slate-600">
+                        <a href="" routerLink="" (click)="onSaveData()">Save</a>
+                    </li>
+                    <li>
+                        <a href="" routerLink="" (click)="onFetchData()">Fetch</a>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
