@@ -1,7 +1,5 @@
-import { Component, EventEmitter, Output } from "@angular/core";
+import { Component } from "@angular/core";
 import { DataStorageService } from "../data-storage.service";
-import { RecipeService } from "../recipies/recipe.service";
-
 @Component({
     selector: 'app-header',
     templateUrl: './header.component.html',
