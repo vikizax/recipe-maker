@@ -2,7 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { RecipeService } from "./recipies/recipe.service";
 import { Recipe } from "./recipies/recipe-list/recipe.model";
-import { Subject } from "rxjs";
+import { map, Subject, tap } from "rxjs";
 
 @Injectable({
     providedIn: 'root'
@@ -16,7 +16,7 @@ export class DataStorageService {
         this.error.next('')
     }
 
-    private errorHandler(err:Error) {
+    private errorHandler(err: Error) {
         this.error.next(err.message);
         this.isLoading.next(false);
     }
@@ -26,7 +26,6 @@ export class DataStorageService {
         this.error.next('')
         const recipies = this.recipiesService.getRecipies();
         this.http.put(this.REALTIME_DB_LINK, recipies).subscribe(response => {
-            console.log({ response })
             this.isLoading.next(false)
         }, this.errorHandler)
         window.alert('Data Saved!')
@@ -35,9 +34,24 @@ export class DataStorageService {
     getRecipes() {
         this.isLoading.next(true)
         this.error.next('')
-        return this.http.get<Recipe[]>(this.REALTIME_DB_LINK).subscribe(response => {
-            this.recipiesService.setRecipe(response)
-            this.isLoading.next(false)
-        }, this.errorHandler)
+        return this.http.get<Recipe[]>(this.REALTIME_DB_LINK)
+            .pipe(
+                map(value => {
+                    return value.map(recipe => ({ ...recipe, ingredients: recipe.ingredients ?? [] }))
+                }),
+                tap(value => {
+                    this.recipiesService.setRecipe(value)
+                    this.isLoading.next(false)
+                })
+            )
+        // .subscribe({
+        //     next: (value) => {
+        //     },
+        //     error: this.errorHandler,
+        // })
+        // .subscribe(response => {
+        //     this.recipiesService.setRecipe(response)
+        //     this.isLoading.next(false)
+        // }, this.errorHandler)
     }
 }

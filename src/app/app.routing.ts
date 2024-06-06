@@ -5,12 +5,13 @@ import { RecipeEditComponent } from "./recipies/recipe-edit/recipe-edit.componen
 import { RecipeStartComponent } from "./recipies/recipe-start/recipe-start.component";
 import { RecipiesComponent } from "./recipies/recipies.component";
 import { ShoppingListComponent } from "./shopping-list/shopping-list.component";
+import { RecipiesResolverService } from "./recipies/recipies-resolvers.service";
 
 const route: Routes = [
     {
         path: '',
         redirectTo: '/recipies',
-        pathMatch: 'full'
+        pathMatch: 'full',
     },
     {
         path: 'recipies',
@@ -19,6 +20,7 @@ const route: Routes = [
             {
                 path: '',
                 component: RecipeStartComponent,
+                resolve: [RecipiesResolverService],
             },
             {
                 path: 'new',
@@ -26,11 +28,13 @@ const route: Routes = [
             },
             {
                 path: ':id',
-                component: RecipeDetailsComponent
+                component: RecipeDetailsComponent,
+                resolve: [RecipiesResolverService]
             },
             {
                 path: ':id/edit',
-                component: RecipeEditComponent
+                component: RecipeEditComponent,
+                resolve: [RecipiesResolverService]
             },
         ]
     },

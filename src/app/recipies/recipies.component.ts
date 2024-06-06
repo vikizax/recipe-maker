@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RecipeService } from './recipe.service';
+import { EventType, Router } from '@angular/router';
 
 @Component({
   selector: 'app-recipies',
@@ -7,5 +8,5 @@ import { RecipeService } from './recipe.service';
   styleUrl: './recipies.component.css',
   providers: []
 })
-export class RecipiesComponent {
-}
+export class RecipiesComponent {}
+
