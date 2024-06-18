@@ -6,6 +6,7 @@ import { RecipeStartComponent } from "./recipies/recipe-start/recipe-start.compo
 import { RecipiesComponent } from "./recipies/recipies.component";
 import { ShoppingListComponent } from "./shopping-list/shopping-list.component";
 import { RecipiesResolverService } from "./recipies/recipies-resolvers.service";
+import { AuthComponent } from "./auth/auth.component";
 
 const route: Routes = [
     {
@@ -41,6 +42,9 @@ const route: Routes = [
     {
         path: 'shopping-list',
         component: ShoppingListComponent
+    }, {
+        path: 'auth',
+        component: AuthComponent
     }
 ]
 
