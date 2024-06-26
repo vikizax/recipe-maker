@@ -10,6 +10,8 @@
                 <div class="links flex gap-2">
                     <!-- <a href="#" (click)="onSelect('recipes', $event)">Recipies</a>
                     <a href="#" (click)="onSelect('shopping-list', $event)">Shopping list</a>  -->
+                    <a routerLink="/auth" [routerLinkActive]="'underline'"
+                        [routerLinkActiveOptions]="{exact: true}">Authenticate</a>
                     <a routerLink="/recipies" [routerLinkActive]="'underline'"
                         [routerLinkActiveOptions]="{exact: true}">Recipies</a>
                     <a routerLink="/shopping-list" [routerLinkActive]="'underline'"
@@ -17,7 +19,7 @@
                 </div>
             </div>
             <div class="right text-white menu-btn">
-                <a href=""  [routerLink]="">Menu &#8595;</a>
+                <a href="" [routerLink]="">Menu &#8595;</a>
                 <ul class="menu-list bg-slate-100 text-black border border-slate-400 px-2">
                     <li class="border-b-2 border-slate-600">
                         <a href="" routerLink="" (click)="onSaveData()">Save</a>
