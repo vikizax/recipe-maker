@@ -1,14 +1,22 @@
 <div class="flex flex-col justify-center items-center">
-    <form>
+    <form #authForm="ngForm" (ngSubmit)="onSubmit(authForm)">
         <div class="flex flex-col gap-1 my-4">
             <label for="email" class="">Email</label>
-            <input type="email" name="email" id="email" class="outline outline-1 rounded outline-gray-300">
+            <input ngModel required type="email" name="email" id="email" email
+                class="outline outline-1 rounded outline-gray-300">
         </div>
         <div class="flex flex-col gap-1 mb-4">
             <label for="password" class="">Password</label>
-            <input type="password" name="password" id="password" class="outline outline-1 rounded outline-gray-300">
+            <input ngModel minlength="6" required type="password" name="password" id="password"
+                class="outline outline-1 rounded outline-gray-300">
         </div>
-        <button class="border text-blue-400 rounded px-2 border-blue-400 active:bg-blue-200   transition-colors font-medium mr-2">Sign Up</button> <span class="text-slate-500 font-bold">|</span>
-        <button class="ml-2 border text-blue-400 rounded px-2 border-blue-400 active:bg-blue-200   transition-colors font-medium">Switch to Login</button>
+        <button type="submit"
+            [disabled]="!authForm.valid"
+            class="disabled:bg-slate-500 disabled:text-white disabled:border-none border text-blue-400 rounded px-2 border-blue-400 active:bg-blue-200   transition-colors font-medium mr-2 w-32">{{isLoginMode
+            ? 'Login' : 'Sign Up'}}</button>
+        <span class="text-slate-500 font-bold">|</span>
+        <button type="button"
+            class="w-40 ml-2 border text-blue-400 rounded px-2 border-blue-400 active:bg-blue-200   transition-colors font-medium"
+            (click)="onSwitchMode()">Switch to {{isLoginMode ? 'Sign Up': 'Login'}}</button>
     </form>
 </div>
