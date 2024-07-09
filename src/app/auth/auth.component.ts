@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { AuthResponseType, AuthService } from './auth.service';
 import { Observable, Subject, Subscription } from 'rxjs';
 import { User } from './user.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-auth',
@@ -15,8 +16,8 @@ export class AuthComponent {
   error: string | null = null;
   userSubs: Subscription;
 
-  constructor(private authService: AuthService) {
-    this.userSubs = authService.user.subscribe(user => console.log({ user: user.token }))
+  constructor(private authService: AuthService, private router: Router) {
+    // this.userSubs = authService.user.subscribe(user => console.log({ user: user.token }))
   }
 
   onSwitchMode() {
@@ -41,6 +42,7 @@ export class AuthComponent {
       next: () => {
         this.loading = false;
         form.resetForm()
+        this.router.navigate(['/recipies'])
       }, error: (error: Error) => {
         this.error = error.message as string
         this.loading = false;

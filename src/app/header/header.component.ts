@@ -1,5 +1,7 @@
 import { Component } from "@angular/core";
 import { DataStorageService } from "../data-storage.service";
+import { AuthService } from "../auth/auth.service";
+import { Router } from "@angular/router";
 @Component({
     selector: 'app-header',
     templateUrl: './header.component.html',
@@ -12,11 +14,24 @@ export class HeaderComponent {
     //     event.preventDefault()
     //     this.featureSelected.emit(feature)
     // }
-    constructor(private dataStorageService: DataStorageService) { }
+    isAuthenticated: boolean = false
+    constructor(private dataStorageService: DataStorageService, private authService: AuthService, private router: Router) {
+        authService.user.subscribe(user => {
+            if (user?.token) this.isAuthenticated = true
+            else this.isAuthenticated = false;
+
+            console.log({ user })
+        })
+    }
     onSaveData() {
         this.dataStorageService.storeRecipes()
     }
     onFetchData() {
         this.dataStorageService.getRecipes().subscribe()
+    }
+
+    onLogout() {
+        this.authService.logout()
+        this.router.navigate(['/auth'])
     }
 }

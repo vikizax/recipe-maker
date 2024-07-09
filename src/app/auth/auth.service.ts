@@ -20,7 +20,7 @@ export class AuthService {
     private API_KEY: string = 'AIzaSyAKV9bw6Uq7XBddZLpC7cvNTzPKNFbE7XY'
     private SIGNUP_API: string = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${this.API_KEY}`
     private LOGIN_API: string = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${this.API_KEY}`
-    user = new Subject<User>()
+    user = new Subject<User | null>()
 
     constructor(private http: HttpClient) { }
 
@@ -57,6 +57,10 @@ export class AuthService {
             returnSecureToken: true
         })
             .pipe(catchError(this.handleError), tap(this.handleAuthenticationData.bind(this)))
+    }
+
+    logout() {
+        this.user.next(null)
     }
 
 }

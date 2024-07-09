@@ -3,17 +3,22 @@ import { Injectable } from "@angular/core";
 import { RecipeService } from "./recipies/recipe.service";
 import { Recipe } from "./recipies/recipe-list/recipe.model";
 import { map, Subject, tap } from "rxjs";
+import { AuthService } from "./auth/auth.service";
 
 @Injectable({
     providedIn: 'root'
 })
 export class DataStorageService {
-    private REALTIME_DB_LINK: string = 'https://ng-be-c15f9-default-rtdb.firebaseio.com/recipies.json'
+    private REALTIME_DB_LINK: string = 'https://ng-be-c15f9-default-rtdb.firebaseio.com/recipies.json?auth='
     isLoading = new Subject<boolean>()
     error = new Subject<string>();
-    constructor(private http: HttpClient, private recipiesService: RecipeService) {
+    constructor(private http: HttpClient, private recipiesService: RecipeService, private authService: AuthService) {
         this.isLoading.next(false)
         this.error.next('')
+        authService.user.subscribe(user => {
+            if (user?.token)
+                this.REALTIME_DB_LINK += `${user?.token}`
+        })
     }
 
     private errorHandler(err: Error) {

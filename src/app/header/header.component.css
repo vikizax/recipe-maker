@@ -6,7 +6,7 @@
   display: none;
 }
 .menu-btn:hover .menu-list {
-  display: block ;
+  display: block;
   position: absolute;
-  width: 55px;
+  width: fit-content;
 }

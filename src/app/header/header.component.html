@@ -13,20 +13,27 @@
                     <a routerLink="/auth" [routerLinkActive]="'underline'"
                         [routerLinkActiveOptions]="{exact: true}">Authenticate</a>
                     <a routerLink="/recipies" [routerLinkActive]="'underline'"
-                        [routerLinkActiveOptions]="{exact: true}">Recipies</a>
+                        [routerLinkActiveOptions]="{exact: true}" *ngIf="isAuthenticated">Recipies</a>
                     <a routerLink="/shopping-list" [routerLinkActive]="'underline'"
                         [routerLinkActiveOptions]="{exact: true}">Shopping list</a>
                 </div>
             </div>
-            <div class="right text-white menu-btn">
+            <div class="right text-white menu-btn" *ngIf="isAuthenticated">
                 <a href="" [routerLink]="">Menu &#8595;</a>
                 <ul class="menu-list bg-slate-100 text-black border border-slate-400 px-2">
-                    <li class="border-b-2 border-slate-600">
-                        <a href="" routerLink="" (click)="onSaveData()">Save</a>
-                    </li>
-                    <li>
-                        <a href="" routerLink="" (click)="onFetchData()">Fetch</a>
-                    </li>
+                    <div class="" *ngIf="true">
+                        <li class="hover:text-sky-800 border-b-2 border-slate-600">
+                            <a href="" routerLink="" (click)="onSaveData()">Save</a>
+                        </li>
+                        <li class="hover:text-sky-800 border-b-2 border-slate-600">
+                            <a href="" routerLink="" (click)="onFetchData()">Fetch</a>
+                        </li>
+                    </div>
+                    <div class="" *ngIf="true">
+                        <li class="hover:text-sky-800">
+                            <a href="" routerLink="" (click)="onLogout()">Logout</a>
+                        </li>
+                    </div>
                 </ul>
             </div>
         </div>
