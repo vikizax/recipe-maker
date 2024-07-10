@@ -2,7 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { RecipeService } from "./recipies/recipe.service";
 import { Recipe } from "./recipies/recipe-list/recipe.model";
-import { map, Subject, tap } from "rxjs";
+import { exhaustMap, map, Subject, take, tap } from "rxjs";
 import { AuthService } from "./auth/auth.service";
 
 @Injectable({
@@ -15,10 +15,6 @@ export class DataStorageService {
     constructor(private http: HttpClient, private recipiesService: RecipeService, private authService: AuthService) {
         this.isLoading.next(false)
         this.error.next('')
-        authService.user.subscribe(user => {
-            if (user?.token)
-                this.REALTIME_DB_LINK += `${user?.token}`
-        })
     }
 
     private errorHandler(err: Error) {
@@ -30,33 +26,35 @@ export class DataStorageService {
         this.isLoading.next(true)
         this.error.next('')
         const recipies = this.recipiesService.getRecipies();
-        this.http.put(this.REALTIME_DB_LINK, recipies).subscribe(response => {
-            this.isLoading.next(false)
-        }, this.errorHandler)
-        window.alert('Data Saved!')
+        let token: string = '';
+        this.authService.user.pipe(take(1)).subscribe(user => {
+            if (user?.token) token = user.token
+        })
+        this.http.put(this.REALTIME_DB_LINK + token, recipies).
+            subscribe({
+                next() {
+                    this.isLoading.next(false)
+                    window.alert('Data Saved!')
+                },
+                error: this.errorHandler,
+            })
     }
 
     getRecipes() {
         this.isLoading.next(true)
         this.error.next('')
-        return this.http.get<Recipe[]>(this.REALTIME_DB_LINK)
-            .pipe(
-                map(value => {
-                    return value.map(recipe => ({ ...recipe, ingredients: recipe.ingredients ?? [] }))
-                }),
-                tap(value => {
-                    this.recipiesService.setRecipe(value)
-                    this.isLoading.next(false)
-                })
-            )
-        // .subscribe({
-        //     next: (value) => {
-        //     },
-        //     error: this.errorHandler,
-        // })
-        // .subscribe(response => {
-        //     this.recipiesService.setRecipe(response)
-        //     this.isLoading.next(false)
-        // }, this.errorHandler)
+        return this.authService.user.pipe(take(1), exhaustMap(user => {
+            return this.http.get<Recipe[]>(this.REALTIME_DB_LINK + user?.token)
+                .pipe(
+                    map(value => {
+                        return value.map(recipe => ({ ...recipe, ingredients: recipe.ingredients ?? [] }))
+                    }),
+                    tap(value => {
+                        this.recipiesService.setRecipe(value)
+                        this.isLoading.next(false)
+                    })
+                )
+        }))
     }
+
 }
