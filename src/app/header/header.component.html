@@ -11,7 +11,7 @@
                     <!-- <a href="#" (click)="onSelect('recipes', $event)">Recipies</a>
                     <a href="#" (click)="onSelect('shopping-list', $event)">Shopping list</a>  -->
                     <a routerLink="/auth" [routerLinkActive]="'underline'"
-                        [routerLinkActiveOptions]="{exact: true}">Authenticate</a>
+                        [routerLinkActiveOptions]="{exact: true}" *ngIf="!isAuthenticated">Authenticate</a>
                     <a routerLink="/recipies" [routerLinkActive]="'underline'"
                         [routerLinkActiveOptions]="{exact: true}" *ngIf="isAuthenticated">Recipies</a>
                     <a routerLink="/shopping-list" [routerLinkActive]="'underline'"

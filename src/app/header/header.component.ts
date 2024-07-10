@@ -9,12 +9,6 @@ import { Subscription } from "rxjs";
     styleUrl: './header.component.css'
 })
 export class HeaderComponent implements OnInit, OnDestroy {
-    // @Output() featureSelected = new EventEmitter<string>()
-
-    // onSelect(feature: string, event: Event) {
-    //     event.preventDefault()
-    //     this.featureSelected.emit(feature)
-    // }
     isAuthenticated: boolean = false
     userSubscription: Subscription
     constructor(private dataStorageService: DataStorageService, private authService: AuthService, private router: Router) {
@@ -24,7 +18,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
         this.userSubscription = this.authService.user.subscribe(user => {
             if (user?.token) this.isAuthenticated = true
             else this.isAuthenticated = false;
-            console.log({ user })
         })
     }
 
@@ -37,7 +30,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
     onLogout() {
         this.authService.logout()
-        this.router.navigate(['/auth'])
     }
 
     ngOnDestroy(): void {

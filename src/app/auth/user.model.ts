@@ -1,3 +1,9 @@
+export type UserType = {
+    email: string,
+    id: string,
+    _token: string,
+    _tokenExpirationDate: Date
+}
 export class User {
     constructor(
         public email: string,
