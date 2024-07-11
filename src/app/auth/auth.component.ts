@@ -15,7 +15,7 @@ export class AuthComponent {
   error: string | null = null;
   userSubs: Subscription;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router) { }
 
   onSwitchMode() {
     this.isLoginMode = !this.isLoginMode;
@@ -48,4 +48,7 @@ export class AuthComponent {
 
   }
 
+  onErrorClose() {
+    this.error = ''
+  }
 }

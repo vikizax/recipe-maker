@@ -1,0 +1,13 @@
+<div class="flex gap-4 flex-row mt-2 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+    role="alert" *ngIf="error">
+    <div class="flex-1">
+        <strong class="font-bold">Ops!</strong>
+        <span class="block sm:inline ml-1">Something seriously bad happened.</span>
+        <span class="block sm:inline ml-1">{{ error }}</span>
+    </div>
+
+    <button class="text-xs" (click)="onClose()">
+        ❌
+    </button>
+
+</div>
