@@ -1,8 +1,8 @@
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { Router } from "@angular/router";
 import { BehaviorSubject, catchError, tap, throwError } from "rxjs";
 import { User, UserType } from "./user.model";
-import { Router } from "@angular/router";
 
 export type AuthResponseType = {
     kind: string;
@@ -21,7 +21,6 @@ export class AuthService {
     private API_KEY: string = 'AIzaSyAKV9bw6Uq7XBddZLpC7cvNTzPKNFbE7XY'
     private SIGNUP_API: string = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${this.API_KEY}`
     private LOGIN_API: string = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${this.API_KEY}`
-    // user = new Subject<User | null>()
     user = new BehaviorSubject<User | null>(null)
     tokenExpTimer: ReturnType<typeof setTimeout>;
     constructor(private http: HttpClient, private router: Router) { }
@@ -51,13 +50,12 @@ export class AuthService {
         if (!userData) return
         const parsedData = JSON.parse(userData) as UserType;
         const loadedUser = new User(parsedData.email, parsedData.id, parsedData._token, new Date(parsedData._tokenExpirationDate))
-
         if (loadedUser.token) {
             const expDuration = new Date(parsedData._tokenExpirationDate).getTime() - new Date().getTime()
             this.autoLogout(expDuration)
             this.user.next(loadedUser)
-        }
-
+        } else
+            this.logout()
     }
 
     autoLogout(expDuration: number) {

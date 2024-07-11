@@ -1,12 +1,13 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
+import { AuthComponent } from "./auth/auth.component";
+import { AuthGuard } from "./auth/auth.guard";
 import { RecipeDetailsComponent } from "./recipies/recipe-details/recipe-details.component";
 import { RecipeEditComponent } from "./recipies/recipe-edit/recipe-edit.component";
 import { RecipeStartComponent } from "./recipies/recipe-start/recipe-start.component";
+import { RecipiesResolverService } from "./recipies/recipies-resolvers.service";
 import { RecipiesComponent } from "./recipies/recipies.component";
 import { ShoppingListComponent } from "./shopping-list/shopping-list.component";
-import { RecipiesResolverService } from "./recipies/recipies-resolvers.service";
-import { AuthComponent } from "./auth/auth.component";
 
 const route: Routes = [
     {
@@ -17,6 +18,7 @@ const route: Routes = [
     {
         path: 'recipies',
         component: RecipiesComponent,
+        canActivate: [AuthGuard],
         children: [
             {
                 path: '',
@@ -50,7 +52,7 @@ const route: Routes = [
 
 
 @NgModule({
-    imports: [ 
+    imports: [
         RouterModule.forRoot(route)
     ],
     exports: [RouterModule]

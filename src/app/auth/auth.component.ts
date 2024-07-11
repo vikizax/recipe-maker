@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { AuthResponseType, AuthService } from './auth.service';
-import { Observable, Subject, Subscription } from 'rxjs';
-import { User } from './user.model';
 import { Router } from '@angular/router';
+import { Observable, Subscription } from 'rxjs';
+import { AuthResponseType, AuthService } from './auth.service';
 
 @Component({
   selector: 'app-auth',
@@ -16,9 +15,7 @@ export class AuthComponent {
   error: string | null = null;
   userSubs: Subscription;
 
-  constructor(private authService: AuthService, private router: Router) {
-    // this.userSubs = authService.user.subscribe(user => console.log({ user: user.token }))
-  }
+  constructor(private authService: AuthService, private router: Router) {}
 
   onSwitchMode() {
     this.isLoginMode = !this.isLoginMode;
@@ -40,9 +37,9 @@ export class AuthComponent {
 
     authObservable.subscribe({
       next: () => {
-        this.loading = false;
         form.resetForm()
         this.router.navigate(['/recipies'])
+        this.loading = false;
       }, error: (error: Error) => {
         this.error = error.message as string
         this.loading = false;
